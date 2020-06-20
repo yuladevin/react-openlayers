@@ -7,24 +7,46 @@ import {
   Map, Layers, Overlay, Util    //objects
 }  from "../../src/index";
 
-var extent: any = [0, 0, 1024, 968];
+var extent: any = [0, 0, 512, 512];
 var projection = new ol.proj.Projection({
-  code: 'xkcd-image',
+  code: 'static-image',
   units: 'pixels',
   extent: extent
 });
 var view = {
   projection: projection,
   center: ol.extent.getCenter(extent),
-  zoom: 2,
+  zoom: 0,
   maxZoom: 9
 };
-var imageSource = new ol.source.ImageStatic({
-  attributions: '© <a href="http://xkcd.com/license.html">xkcd</a>',
-  url: 'https://imgs.xkcd.com/comics/online_communities.png',
+var BgAllExpanded = new ol.source.ImageStatic({
+  attributions: '',
+  url: 'svg/BgAllExpanded.svg',
   projection: projection,
   imageExtent: extent
 });
+
+var UpperLayerUnited0 = new ol.source.ImageStatic({
+  attributions: '',
+  url: 'svg/UpperLayerUnited0.svg',
+  projection: projection,
+  imageExtent: extent
+});
+
+var Blue1 = new ol.source.ImageStatic({
+  attributions: '',
+  url: 'svg/Blue1.svg',
+  projection: projection,
+  imageExtent: extent
+});
+
+var Brown2 = new ol.source.ImageStatic({
+  attributions: '',
+  url: 'svg/Brown2.svg',
+  projection: projection,
+  imageExtent: extent
+});
+
 
 export class Image extends React.Component<any,any> {
   constructor(props) {
@@ -36,15 +58,21 @@ export class Image extends React.Component<any,any> {
       <div>
         <Map view={view}>
           <Layers>
-            <layer.Image source={imageSource} />
+            <layer.Image source={BgAllExpanded} style="position:absolute; zIndex:0"/>
+            <layer.Image source={UpperLayerUnited0} style="position:absolute; zIndex:1"/>
+            <layer.Image source={Blue1} style="position:absolute; zIndex:2"/>
+            <layer.Image source={Brown2} style="position:absolute; zIndex:3"/>
           </Layers>
         </Map>
         <a href="https://github.com/allenhwkim/react-openlayers/blob/master/app/layers/image.tsx">source</a>
         <pre>{`
           <Map view={view}>
             <Layers>
-              <layer.Image source={imageSource} />
-            </Layers>
+              <layer.Image source={BgAllExpanded} style="position:absolute; zIndex:0"/>
+              <layer.Image source={UpperLayerUnited0} style="position:absolute; zIndex:1"/>
+              <layer.Image source={Blue1} style="position:absolute; zIndex:2"/>
+              <layer.Image source={Brown2} style="position:absolute; zIndex:3"/>
+            </Layers> 
           </Map>
         `}</pre>
       </div>
